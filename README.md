@@ -34,15 +34,15 @@ vm3s use 22.13.0
 
 #### List Installed Versions
 To list all installed versions of Node.js, use the following command: 
-```
-bash vm3s list
+```bash
+vm3s list
 ```
 
 
 #### Uninstall a Specific Version. 
 To uninstall a specific version of Node.js, use the following command: 
-```
-bash vm3s remove 22.13.0
+```bash
+vm3s remove 22.13.0
 ``` 
 
 
