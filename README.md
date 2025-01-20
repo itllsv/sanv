@@ -1,9 +1,9 @@
-# VM3S: Version Manager Super Super Simple
+# SANV: Simply a Node.js Versioner.
 
-VM3S is a super super simple version manager for Node.js, created for the fun and educational experience of developing my own tool to simplify the process of installing, using, and managing multiple versions of Node.js in my environment.
+SANV is a version manager for Node.js, created for the fun and educational experience of developing my own tool to simplify the process of installing, using, and managing multiple versions of Node.js (Like NVM).
 
 ### Features 
-- Install, Switch, List, Search and Remove versions of Node.js. 
+- Install, switch, list, search, and remove versions of Node.js.
 
 ### Installation 
 #### Prerequisites 
@@ -15,32 +15,31 @@ TODO
 ``` 
 
 ### Usage 
-#### Install a Specific Version
+#### Install a version
 ```bash 
-vm3s install 22.13.0
+sanv install 22.13.0
 OR
-vm3s install 22
+sanv install 22
 OR
-vm3s install latest
+sanv install latest
 ``` 
 
 
-#### Pick a Specific Version
+#### Pick an Installed Version
 ```bash 
-vm3s use 22.13.0
+sanv use 22.13.0
 ``` 
 
 
 #### List Installed Versions
 ```bash
-vm3s list
+sanv list
 ```
 
 
-#### Uninstall a Specific Version. 
-To uninstall a specific version of Node.js, use the following command: 
+#### Remove a Version
 ```bash
-vm3s remove 22.13.0
+sanv remove 22.13.0
 ``` 
 
 
