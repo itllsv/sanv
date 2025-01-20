@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+check_arch() {
+  ARCH=$(arch)
+
+  case "$ARCH" in
+  x86_64)
+    SYSTEM_ARCH="x64"
+    ;;
+  aarch64)
+    SYSTEM_ARCH="arm64"
+    ;;
+  armv7l)
+    SYSTEM_ARCH="armv7l"
+    ;;
+  ppc64le)
+    SYSTEM_ARCH="ppc64le"
+    ;;
+  s390x)
+    SYSTEM_ARCH="s390x"
+    ;;
+  *)
+    log_message error "Unsupported architecture: $ARCH"
+    exit 1
+    ;;
+  esac
+}

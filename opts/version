@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+version() {
+  log_message info $(node -v)
+}

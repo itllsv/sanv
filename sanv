@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+SANV_DIR="$(cd "$(dirname "$(realpath "$0")")" && pwd)"
+
+source "$SANV_DIR/vars"
+
+for FILE in "$LIB_DIR"/*; do
+  source "$FILE"
+done
+
+for FILE in "$OPTS_DIR"/*; do
+  source "$FILE"
+done
+
+check_commands
+check_sanv_executable
+check_installation_dir
+check_arch
+
+if [[ "$SANV_OPT" == "install" ]]; then
+  install
+fi
+
+if [[ "$SANV_OPT" == "version" ]]; then
+  version
+fi
+
+if [[ "$SANV_OPT" == "search" ]]; then
+  search
+fi
+
+if [[ "$SANV_OPT" == "list" ]]; then
+  list
+fi
+
+if [[ "$SANV_OPT" == "use" ]]; then
+  use
+fi
+
+if [[ "$SANV_OPT" == "remove" ]]; then
+  remove
+fi

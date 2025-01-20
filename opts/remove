@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+remove() {
+  VERSIONS=$(ls $INSTALL_DIR)
+
+  if [[ -z "$VERSIONS" ]]; then
+    log_message info "No installed versions found."
+    exit 1
+  else
+    fzf_prompt "$VERSIONS" remove_version
+  fi
+}

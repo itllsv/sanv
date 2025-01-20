@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+check_sanv_executable() {
+  if [[ ! -L "$SANV_SYMLINK_PATH" ]]; then
+    log_message info "Checking SANV executable..."
+    create_symlink "$SANV_PATH" "$SANV_SYMLINK_PATH"
+    log_message success "SANV executable was configured and now accessible system-wide."
+  fi
+
+}

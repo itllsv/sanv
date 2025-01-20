@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+URL="https://nodejs.org/dist/"
+NODE_VERSION_COMPLETE=""
+BIN_DIR=/usr/local/bin
+NODE_BIN_PATH="$BIN_DIR/node"
+NPM_BIN_PATH="$BIN_DIR/npm"
+
+get_real_version_from_url() {
+  local REDIRECT_URL
+  local VERSION
+
+  URL="${URL}$NODE_VERSION/node-$NODE_VERSION-linux-$SYSTEM_ARCH.tar.xz"
+
+  REDIRECT_URL=$(curl -sIL -w "%{url_effective}" -o /dev/null "$URL")
+  NODE_VERSION_COMPLETE=$(echo $REDIRECT_URL | grep -oP '(?<=v)[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+
+  log_message success "Installing version: $NODE_VERSION_COMPLETE"
+}
+
+download_and_save_node_version() {
+  if [[ -d "$INTALL_DIR/$NODE_VERSION_COMPLETE" && "$NODE_VERSION" != "latest" ]]; then
+    log_message warning "v$NODE_VERSION_COMPLETE already installed."
+    exit 1
+  fi
+
+  mkdir -p "$INSTALL_DIR/temp"
+
+  curl -L -o- "$URL" |
+    tar -xJ -C "$INSTALL_DIR/temp" --strip-components=1
+
+  if [[ $? -ne 0 ]]; then
+    log_message error "Failed to download or extract Node.js v"$NODE_VERSION". Please check the VERSION and your internet connection."
+    exit 1
+  fi
+
+  if [[ "$NODE_VERSION" == "latest" ]]; then
+    if [[ -d "$INSTALL_DIR/latest" ]]; then
+      sudo rm -rf "$INSTALL_DIR/latest"
+    fi
+
+    mkdir -p "$INSTALL_DIR/latest"
+    sudo cp -r "$INSTALL_DIR/temp"/* "$INSTALL_DIR/latest"
+    log_message info $(ls "$INSTALL_DIR/latest")
+  fi
+
+  if [[ ! -d "$INSTALL_DIR/$NODE_VERSION_COMPLETE" ]]; then
+    mkdir -p "$INSTALL_DIR/$NODE_VERSION_COMPLETE"
+    sudo cp -r "$INSTALL_DIR/temp"/* "$INSTALL_DIR/$NODE_VERSION_COMPLETE"
+  fi
+
+  sudo rm -rf "$INSTALL_DIR/temp"
+}
+
+handle_node_npm_bin() {
+  if [[ -L "$NODE_BIN_PATH" ]]; then
+    sudo rm -rf "$NODE_BIN_PATH"
+  fi
+
+  if [[ -L "$NPM_BIN_PATH" ]]; then
+    sudo rm -rf "$NPM_BIN_PATH"
+  fi
+
+  sudo chmod +x "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/node
+  sudo chmod +x "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/npm
+
+  sudo ln -s "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/node "$BIN_DIR"
+  sudo ln -s "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/npm "$BIN_DIR"
+}
+
+fzf_version() {
+  if [[ $(! command -v fzf &>/dev/null) ]]; then
+    log_message error "fzf is not installed. Please install fzf to use this feature."
+    exit 1
+  fi
+
+  SELECTED_VERSION=$(echo "$ALL_VERSIONS" | fzf --prompt="Select a version: " --query="$NODE_VERSION")
+
+  if [[ -z "$SELECTED_VERSION" ]]; then
+    log_message warning "No version found."
+  else
+    NODE_VERSION="$SELECTED_VERSION"
+  fi
+}
+
+install() {
+  fzf_version
+  get_real_version_from_url
+  download_and_save_node_version
+  handle_node_npm_bin
+}

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+create_node_npm_symlink() {
+  local SOURCE_PATH="$1"
+  local SYMLINK_PATH="$2"
+
+  if [[ -L "$SYMLINK_PATH/node" ]]; then
+    sudo rm -rf "$SYMLINK_PATH/node"
+  fi
+
+  if [[ -L "$SYMLINK_PATH/npm" ]]; then
+    sudo rm -rf "$SYMLINK_PATH/npm"
+  fi
+
+  sudo chmod +x "$SOURCE_PATH"
+  sudo ln -s "$SOURCE_PATH" "$SYMLINK_PATH"
+}

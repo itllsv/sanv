@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+log_message() {
+  local color
+  local reset='\033[0m'
+
+  case "$1" in
+  info)
+    color='\033[0;36m' #Blue
+    ;;
+  success)
+    color='\033[0;32m' #Green
+    ;;
+  warning)
+    color='\033[0;33m' #Yellow
+    ;;
+  error)
+    color='\033[0;31m' #Red
+    ;;
+  *)
+    color="$reset"
+    ;;
+  esac
+
+  echo -e "$color>>> $2 $reset"
+}

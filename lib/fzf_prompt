@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+fzf_prompt() {
+  local VERSIONS="$1"
+  local ACTION="$2"
+
+  if [[ $(! command -v fzf &>/dev/null) ]]; then
+    log_message error "fzf is not installed. Please install fzf to use this feature."
+    exit 1
+  fi
+
+  SELECTED_VERSION=$(echo "$VERSIONS" | fzf --prompt="Select a version: " --query="$NODE_VERSION")
+
+  if [[ -z "$SELECTED_VERSION" ]]; then
+    log_message warning "No version found."
+  else
+    "$ACTION" "$SELECTED_VERSION"
+  fi
+}

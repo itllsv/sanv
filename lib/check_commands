@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+check_commands() {
+  if [[ 
+    "$SANV_OPT" != "install" &&
+    "$SANV_OPT" != "version" &&
+    "$SANV_OPT" != "search" &&
+    "$SANV_OPT" != "list" &&
+    "$SANV_OPT" != "use" &&
+    "$SANV_OPT" != "remove" ]]; then
+    log_message error "Invalid OPTION: '${SANV_OPT}'. A valid OPTION is required: install | search | list | use | remove."
+    exit 1
+  fi
+
+  if [[ 
+    -z "$NODE_VERSION" &&
+    "$SANV_OPT" != "search" &&
+    "$SANV_OPT" != "version" &&
+    "$SANV_OPT" != "list" ]]; then
+    log_message error "Missing VERSION. A VERSION is required for option '${SANV_OPT}'. Ex: latest | 22 | 22.13.0"
+    exit 1
+  fi
+}

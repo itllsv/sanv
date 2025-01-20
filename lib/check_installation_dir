@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+check_installation_dir() {
+  if [[ ! -d "$INSTALL_DIR" ]]; then
+    log_message info "Checking installed versions directory..."
+    mkdir "$INSTALL_DIR"
+    log_message success "~/.sanv-versions/ directory was created successfully."
+  fi
+}

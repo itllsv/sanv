@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+remove_version() {
+  if [[ ! -d "$INSTALL_DIR"/"$NODE_VERSION" ]]; then
+    echo "$NODE_VERSION version not found."
+    exit 1
+  fi
+
+  sudo rm -rf /usr/local/bin/node
+  sudo rm -rf /usr/local/bin/npm
+  sudo rm -rf "$VERSION_DIR"
+}

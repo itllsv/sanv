@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+SANV_SYMLINK_PATH=/usr/local/bin/sanv
+SANV_OPT="$1"
+NODE_VERSION="$2"
+SANV_PATH="$SANV_DIR/sanv"
+LIB_DIR="$SANV_DIR/lib"
+OPTS_DIR="$SANV_DIR/opts"
+INSTALL_DIR="$HOME/.sanv-versions"
+TEMP_INSTALL_DIR="$INSTALL_DIR/temp"
+SYSTEM_ARCH="x64"
+ALL_VERSIONS=$(curl -s https://nodejs.org/dist/ | grep -oP 'v[0-9]+\.[0-9]+\.[0-9]+/' | sed 's:/$::')
