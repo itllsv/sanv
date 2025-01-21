@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
 remove_version() {
-  if [[ ! -d "$INSTALL_DIR"/"$NODE_VERSION" ]]; then
-    echo "$NODE_VERSION version not found."
+  if [[ ! -d "$INSTALL_DIR"/"$NODE_VERSION_COMPLETE" ]]; then
+    echo "$NODE_VERSION_COMPLETE version not found."
     exit 1
   fi
 
-  sudo rm -rf /usr/local/bin/node
-  sudo rm -rf /usr/local/bin/npm
-  sudo rm -rf "$VERSION_DIR"
+  if [[ $(node -v) == "$NODE_VERSION_COMPLETE" ]]; then
+    log_message warning "The version to be removed is the currently used version: $NODE_VERSION_COMPLETE"
+    log_message warning "Please use 'sanv use' or 'sanv install' after removal to set a new version."
+    sudo rm -rf /usr/local/bin/node
+    sudo rm -rf /usr/local/bin/npm
+  fi
+
+  sudo rm -rf "$INSTALL_DIR/$NODE_VERSION_COMPLETE"
+  log_message info "$NODE_VERSION_COMPLETE removed."
 }

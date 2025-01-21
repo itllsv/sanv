@@ -9,4 +9,4 @@ OPTS_DIR="$SANV_DIR/opts"
 INSTALL_DIR="$HOME/.sanv-versions"
 TEMP_INSTALL_DIR="$INSTALL_DIR/temp"
 SYSTEM_ARCH="x64"
-ALL_VERSIONS=$(curl -s https://nodejs.org/dist/ | grep -oP 'v[0-9]+\.[0-9]+\.[0-9]+/' | sed 's:/$::')
+ALL_VERSIONS=$(curl -s https://nodejs.org/dist/ | grep -oP '<a[^>]*>[^<]*</a>' | sed -E 's/<[^>]+>//g' | sed 's:/$::')

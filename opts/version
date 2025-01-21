@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
 version() {
+  if [[ ! -L /usr/local/bin/node ]]; then
+    log_message warning "No Node.js version is currently in use."
+    exit 1
+  fi
+
   log_message info $(node -v)
 }

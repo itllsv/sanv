@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 
 set_version() {
-  NODE_VERSION_COMPLETE=$(ls $INSTALL_DIR | sort -t. -k1,1n -k2,2n | tac | grep $NODE_VERSION | head -1)
-
-  if [[ -z "$NODE_VERSION_COMPLETE" ]]; then
-    log_message warning "$NODE_VERSION not found in installed list. Versions available:"
-    sanv list | sort -t. -k1,1n -k2,2n | tac
-    exit 1
-  fi
-
   if [[ -L "$NODE_BIN_PATH" ]]; then
     sudo rm -rf "$NODE_BIN_PATH"
   fi
@@ -23,5 +15,5 @@ set_version() {
   sudo ln -s "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/node "$BIN_DIR"
   sudo ln -s "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/npm "$BIN_DIR"
 
-  log_message success "$(node -v) successfully selected."
+  log_message success "$(node -v)"
 }

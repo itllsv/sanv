@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+execute_option() {
+  case "$SANV_OPT" in
+  install) install ;;
+  version) version ;;
+  search) search ;;
+  list) list ;;
+  use) use ;;
+  remove) remove ;;
+  *) exit 1 ;;
+  esac
+}

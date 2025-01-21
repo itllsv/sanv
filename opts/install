@@ -14,23 +14,24 @@ get_real_version_from_url() {
 
   REDIRECT_URL=$(curl -sIL -w "%{url_effective}" -o /dev/null "$URL")
   NODE_VERSION_COMPLETE=$(echo $REDIRECT_URL | grep -oP '(?<=v)[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+  NODE_VERSION_COMPLETE="v$NODE_VERSION_COMPLETE"
 
   log_message success "Installing version: $NODE_VERSION_COMPLETE"
 }
 
 download_and_save_node_version() {
   if [[ -d "$INTALL_DIR/$NODE_VERSION_COMPLETE" && "$NODE_VERSION" != "latest" ]]; then
-    log_message warning "v$NODE_VERSION_COMPLETE already installed."
+    log_message warning "$NODE_VERSION_COMPLETE already installed."
     exit 1
   fi
 
   mkdir -p "$INSTALL_DIR/temp"
 
-  curl -L -o- "$URL" |
+  curl -sL -o- "$URL" |
     tar -xJ -C "$INSTALL_DIR/temp" --strip-components=1
 
   if [[ $? -ne 0 ]]; then
-    log_message error "Failed to download or extract Node.js v"$NODE_VERSION". Please check the VERSION and your internet connection."
+    log_message error "Failed to download or extract Node.js "$NODE_VERSION". Please check the VERSION and your internet connection."
     exit 1
   fi
 
@@ -41,7 +42,6 @@ download_and_save_node_version() {
 
     mkdir -p "$INSTALL_DIR/latest"
     sudo cp -r "$INSTALL_DIR/temp"/* "$INSTALL_DIR/latest"
-    log_message info $(ls "$INSTALL_DIR/latest")
   fi
 
   if [[ ! -d "$INSTALL_DIR/$NODE_VERSION_COMPLETE" ]]; then
@@ -50,22 +50,6 @@ download_and_save_node_version() {
   fi
 
   sudo rm -rf "$INSTALL_DIR/temp"
-}
-
-handle_node_npm_bin() {
-  if [[ -L "$NODE_BIN_PATH" ]]; then
-    sudo rm -rf "$NODE_BIN_PATH"
-  fi
-
-  if [[ -L "$NPM_BIN_PATH" ]]; then
-    sudo rm -rf "$NPM_BIN_PATH"
-  fi
-
-  sudo chmod +x "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/node
-  sudo chmod +x "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/npm
-
-  sudo ln -s "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/node "$BIN_DIR"
-  sudo ln -s "$INSTALL_DIR/$NODE_VERSION_COMPLETE"/bin/npm "$BIN_DIR"
 }
 
 fzf_version() {
@@ -87,5 +71,5 @@ install() {
   fzf_version
   get_real_version_from_url
   download_and_save_node_version
-  handle_node_npm_bin
+  set_version
 }

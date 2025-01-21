@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
 list() {
-  VERSIONS=$(ls $INSTALL_DIR)
-  echo "$VERSIONS"
-  exit 1
+  ALL_VERSIONS=$(ls $INSTALL_DIR)
 
-  if [[ -z "$VERSIONS" ]]; then
+  if [[ -z "$ALL_VERSIONS" ]]; then
     log_message info "No installed versions found."
     exit 1
   else
-    fzf_prompt "$VERSIONS" set_version
+    fzf_prompt set_version
   fi
-
 }
