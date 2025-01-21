@@ -4,7 +4,7 @@
 
 
 
-### Features 
+## Features 
 - Install, switch, list, search, and remove versions of Node.js.
 
 
