@@ -16,6 +16,10 @@ get_real_version_from_url() {
   NODE_VERSION_COMPLETE=$(echo $REDIRECT_URL | grep -oP '(?<=v)[0-9]+\.[0-9]+\.[0-9]+' | head -1)
   NODE_VERSION_COMPLETE="v$NODE_VERSION_COMPLETE"
 
+  if [[ $NODE_VERSION_COMPLETE == "v" ]]; then
+    exit 1
+  fi
+
   log_message success "Installing version: $NODE_VERSION_COMPLETE"
 }
 
@@ -61,7 +65,8 @@ fzf_version() {
   SELECTED_VERSION=$(echo "$ALL_VERSIONS" | fzf --prompt="Select a version: " --query="$NODE_VERSION")
 
   if [[ -z "$SELECTED_VERSION" ]]; then
-    log_message warning "No version found."
+    log_message warning "No version selected."
+    exit 1
   else
     NODE_VERSION="$SELECTED_VERSION"
   fi

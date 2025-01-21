@@ -11,7 +11,8 @@ fzf_prompt() {
   SELECTED_VERSION=$(echo "$ALL_VERSIONS" | fzf --prompt="Select a version: " --query="$NODE_VERSION")
 
   if [[ -z "$SELECTED_VERSION" ]]; then
-    log_message warning "No version found."
+    log_message warning "No version selected."
+    exit 1
   else
     NODE_VERSION_COMPLETE="$SELECTED_VERSION"
     "$ACTION"
