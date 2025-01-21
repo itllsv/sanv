@@ -42,11 +42,7 @@ sanv command [initial-input-for-fzf (optional)]
 ### Commands:
 ```install```: List available versions with fzf and install the selected version.
 
-```search```: List available versions with fzf and install the selected version. (Yes, same as install)
-
 ```use```: List installed versions with fzf and switch to the selected version.
-
-```list```: List installed versions with fzf and switch to the selected version. (Yes, same as use)
 
 ```remove```: List installed versions with fzf and remove the selected version.
 
