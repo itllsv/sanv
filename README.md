@@ -2,6 +2,10 @@
 
 ```sanv``` is a version manager for Node.js, created for the fun and educational experience of developing my own tool to simplify the process of installing, using, and managing multiple versions of Node.js (Like NVM).
 
+<br />
+
+![sanv-usage](https://github.com/user-attachments/assets/a84ef32c-1477-4ae0-991f-b71d81bd8bbd)
+
 <br/>
 
 ## Features 
