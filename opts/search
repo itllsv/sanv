@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 search() {
-  fzf_prompt "$ALL_VERSIONS" install
+  install
 }
