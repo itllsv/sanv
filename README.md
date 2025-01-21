@@ -28,14 +28,13 @@ git clone https://github.com/itllsv/sanv.git ~/.sanv && ~/.sanv/install.sh
 
 ## Usage 
 #### Each command follows the structure:
+(Note: The ```version``` command is an exception to this structure and does not use fzf.)
 ```bash 
 sanv command [initial-input-for-fzf (optional)]
 ```
-(Note: The ```version``` command is an exception to this structure and does not use fzf.)
 
 
-
-Commands:
+#### Commands:
 ```install```: Install a specific version of Node.js.
 
 ```use```: Switch to a specific version of Node.js.
