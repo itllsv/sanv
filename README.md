@@ -59,7 +59,13 @@ sanv install lat
 sanv install
 ...
 
+sanv search 22
+...
+
 sanv use 22.13.0
+...
+
+sanv list
 ...
 
 sanv remove v2
