@@ -40,15 +40,15 @@ sanv command [initial-input-for-fzf (optional)]
 <br/>
 
 #### Commands:
-```install```: Install a specific version of Node.js.
+```install```: List available versions with fzf and install the selected version.
 
-```use```: Switch to a specific version of Node.js.
+```search```: List available versions with fzf and install the selected version.
+
+```use```: List installed versions with fzf and switch to the selected version.
 
 ```list```: List all installed versions of Node.js.
 
-```remove```: Remove a specific version of Node.js.
-
-```search```: Search for available Node.js versions.
+```remove```: List installed versions with fzf and remove the selected version.
 
 ```version```: Print the current version of Node.js.(This command does not use fzf and simply outputs the version directly.)
 
