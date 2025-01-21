@@ -2,12 +2,12 @@
 
 ```sanv``` is a version manager for Node.js, created for the fun and educational experience of developing my own tool to simplify the process of installing, using, and managing multiple versions of Node.js (Like NVM).
 
-
+<br/><br/><br/>
 
 ## Features 
 - Install, switch, list, search, and remove versions of Node.js.
 
-
+<br/><br/><br/>
 
 ## Prerequisites 
 - Linux
@@ -15,7 +15,7 @@
 - curl
 - fzf (Because I love it and its incredible)
 
-
+<br/><br/><br/>
 
 ## Installation 
 
@@ -24,7 +24,7 @@ Run the following command in your terminal to download and set up ```sanv```:
 git clone https://github.com/itllsv/sanv.git ~/.sanv && ~/.sanv/install.sh
 ``` 
 
-
+<br/><br/><br/>
 
 ## Usage 
 #### Each command follows the structure:
@@ -33,6 +33,7 @@ git clone https://github.com/itllsv/sanv.git ~/.sanv && ~/.sanv/install.sh
 sanv command [initial-input-for-fzf (optional)]
 ```
 
+<br/><br/><br/>
 
 #### Commands:
 ```install```: Install a specific version of Node.js.
@@ -47,7 +48,7 @@ sanv command [initial-input-for-fzf (optional)]
 
 ```version```: Print the current version of Node.js.(This command does not use fzf and simply outputs the version directly.)
 
-
+<br/><br/><br/>
 
 #### Examples
 ```bash
@@ -73,6 +74,13 @@ sanv search latest
 sanv version
 ```
 
+<br/><br/><br/>
+
+## TODO
+| Task               | Status  |
+|--------------------|---------|
+| Implement for Mac  | Pending |
+| Support for .nvmrc | Pending |
 
 
 #### Contribution We welcome contributions! Please fork the repository, make your changes, and submit a pull request. 
