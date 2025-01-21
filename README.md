@@ -31,7 +31,7 @@ git clone https://github.com/itllsv/sanv.git ~/.sanv && ~/.sanv/install.sh
 <br/>
 
 ## Usage 
-#### Each command follows the structure:
+### Each command follows the structure:
 (Note: The ```version``` command is an exception to this structure and does not use fzf.)
 ```bash 
 sanv command [initial-input-for-fzf (optional)]
@@ -39,14 +39,14 @@ sanv command [initial-input-for-fzf (optional)]
 
 <br/>
 
-#### Commands:
+### Commands:
 ```install```: List available versions with fzf and install the selected version.
 
-```search```: List available versions with fzf and install the selected version.
+```search```: List available versions with fzf and install the selected version. (Yes, same as install)
 
 ```use```: List installed versions with fzf and switch to the selected version.
 
-```list```: List all installed versions of Node.js.
+```list```: List installed versions with fzf and switch to the selected version. (Yes, same as use)
 
 ```remove```: List installed versions with fzf and remove the selected version.
 
@@ -54,7 +54,7 @@ sanv command [initial-input-for-fzf (optional)]
 
 <br/>
 
-#### Examples
+### Examples
 ```bash
 sanv install 22.13
 sanv install v23
@@ -88,4 +88,4 @@ sanv version
 
 <br/>
 
-#### Contribution We welcome contributions! Please fork the repository, make your changes, and submit a pull request. 
+### Contribution We welcome contributions! Please fork the repository, make your changes, and submit a pull request. 
