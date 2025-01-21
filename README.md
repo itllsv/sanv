@@ -9,14 +9,15 @@
 
 
 
-## Installation 
-#### Prerequisites 
+## Prerequisites 
 - Linux
 - git
 - curl
 - fzf (Because I love it and its incredible)
 
 
+
+## Installation 
 
 Run the following command in your terminal to download and set up ```sanv```: 
 ```bash 
