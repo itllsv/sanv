@@ -62,13 +62,7 @@ sanv install
 sanv use 22.13.0
 ...
 
-sanv list 
-...
-
 sanv remove v2
-...
-
-sanv search latest
 ...
 
 sanv version
