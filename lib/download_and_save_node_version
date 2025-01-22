@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+download_and_save_node_version() {
+  log_message success "Installing version: $NODE_VERSION_COMPLETE"
+
+  if [[ -d "$INTALL_DIR/$NODE_VERSION_COMPLETE" && "$NODE_VERSION_COMPLETE" != "latest" ]]; then
+    log_message warning "$NODE_VERSION_COMPLETE already installed."
+    exit 1
+  fi
+
+  mkdir -p "$INSTALL_DIR/temp"
+
+  curl -sL -o- "$URL" |
+    tar -xJ -C "$INSTALL_DIR/temp" --strip-components=1
+
+  if [[ $? -ne 0 ]]; then
+    log_message error "Failed to download or extract Node.js "$NODE_VERSION". Please check the VERSION and your internet connection."
+    exit 1
+  fi
+
+  if [[ "$NODE_VERSION" == "latest" ]]; then
+    if [[ -d "$INSTALL_DIR/latest" ]]; then
+      sudo rm -rf "$INSTALL_DIR/latest"
+    fi
+
+    mkdir -p "$INSTALL_DIR/latest"
+    sudo cp -r "$INSTALL_DIR/temp"/* "$INSTALL_DIR/latest"
+  fi
+
+  if [[ ! -d "$INSTALL_DIR/$NODE_VERSION_COMPLETE" ]]; then
+    mkdir -p "$INSTALL_DIR/$NODE_VERSION_COMPLETE"
+    sudo cp -r "$INSTALL_DIR/temp"/* "$INSTALL_DIR/$NODE_VERSION_COMPLETE"
+  fi
+
+  sudo rm -rf "$INSTALL_DIR/temp"
+}

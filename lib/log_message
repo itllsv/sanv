@@ -22,5 +22,5 @@ log_message() {
     ;;
   esac
 
-  echo -e "$color>>> $2 $reset"
+  echo -e "$color->$reset $2"
 }

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+fzf_for_install() {
+  if [[ $(! command -v fzf &>/dev/null) ]]; then
+    log_message error "fzf is not installed. Please install fzf to use this feature."
+    exit 1
+  fi
+
+  SELECTED_VERSION=$(echo "$ALL_VERSIONS" | fzf --prompt="Select a version: " --query="$NODE_VERSION")
+
+  if [[ -z "$SELECTED_VERSION" ]]; then
+    log_message warning "No version selected."
+    exit 1
+  else
+    NODE_VERSION="$SELECTED_VERSION"
+  fi
+}
